@@ -1,28 +1,18 @@
-<html>
-    <head>
-        <title>Fruit Stock Management!</title>
-		<style>
-			th, td {
-				padding: 15px;
-			}
-		</style>
-    </head>
-    <body>
-	  <h1>Available Fruits</h1>
-	  <table>
-	    <tr>
-		<th>Fruit Name</th>
-		<th>Price Per Kg</th>
-		<th>Quantity In Kgs</th>
-	    </tr>
-	    {% for fruit in fruits %}
-	    <tr>
-		<td>{{ fruit.name }}</td>
-		<td>{{ fruit.price }}</td>
-		<td>{{ fruit.quantity }}</td>
-	    </tr>
-	    {% endfor %}
-	  <table>
-    </body>
-</html>
-
+{% extends "base.html" %}
+{% block content %}
+	<h1>Available Fruits</h1>
+	<table>
+	<tr>
+	<th>Fruit Name</th>
+	<th>Price Per Kg</th>
+	<th>Quantity In Kgs</th>
+	</tr>
+	{% for fruit in fruits %}
+	<tr>
+	<td>{{ fruit.name }}</td>
+	<td>{{ fruit.price }}</td>
+	<td>{{ fruit.quantity }}</td>
+	</tr>
+	{% endfor %}
+	<table>
+{% endblock %}
