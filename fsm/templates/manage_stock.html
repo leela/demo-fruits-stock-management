@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{%  block content %}
+  <form action="" method="POST">
+    <p>type: <br/>
+        <select id="type" name="type">
+            <option value="add">Add Stock</option>
+            <option value="remove">Remove Stock</option>
+        </select> 
+    </p>
+    <p>Fruit Name: <br/>
+        <select id="fruit" name="fruit">
+            {% for fruit in fruits %}
+              <option value="{{fruit.id}}">{{ fruit.name.title() }}</option>
+            {% endfor %}
+        </select> 
+    </p>
+    <p>
+        Quantity In Kgs: <br/>
+        <input type="text" id="quantity" name="quantity"></input>
+    </p>
+    <button type="submit">Modify</button>
+  </form>
+{% endblock %}

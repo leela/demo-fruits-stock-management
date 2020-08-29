@@ -18,3 +18,26 @@ def fruits():
         flash(f"Fruit {name} Added to the system")
         return redirect(url_for("index"))
     return render_template("add_fruit.html")
+
+@app.route("/manage-stock", methods=['GET', 'POST'])
+def manage_stock():
+    if request.method == 'POST':
+        form = request.form
+        type, id, quantity = form['type'], form['fruit'], float(form['quantity'])
+        fruit = db.select("fruits",
+            where="id=$id",
+            vars={"id": int(id)}
+        ).first()
+
+        new_quantity = fruit.quantity + quantity if type=='add' else fruit.quantity - quantity
+
+        db.update("fruits",
+            quantity = new_quantity,
+            where="id=$id",
+            vars={"id": id})
+
+        flash(f"{new_quantity} Kgs of {fruit.name} is available.")
+        return redirect(url_for("index"))
+
+    fruits = db.select("fruits").list()
+    return render_template("manage_stock.html", fruits = fruits)
